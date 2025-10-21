@@ -1,0 +1,34 @@
+Guia rapido do programa de votacao
+
+1. Visao geral
+O arquivo main.c implementa o fluxo completo descrito no enunciado. Os dados sao carregados a partir dos arquivos de texto, as informacoes sao validadas e o programa disponibiliza dois menus para controlar a votacao. Estruturas globais seguem o formato solicitado no PDF.
+
+2. Arquivos de entrada obrigatorios
+- professores.txt: quantidade inicial seguida pelos registros (codigo, departamento, idade, nome).
+- alunos.txt: quantidade inicial seguida pelos registros (matricula, ano, departamento, idade, nome). Apenas alunos do 3o ano sao aceitos.
+- TC_<DEP>.txt: um arquivo para cada sigla BCC, BSI, ADS, GIT e BEC. Cada registro possui codigo do TC, matricula do autor, codigo do orientador e titulo.
+- comissao.txt: quantidade inicial seguida pelos CPFs dos eleitores no formato xxx.xxx.xxx-yy.
+Todos os arquivos precisam estar no mesmo diretorio do executavel. Se qualquer arquivo estiver ausente ou inconsistente, o programa encerra com uma mensagem descritiva.
+
+3. Validacoes principais implementadas
+- Leitores nao podem ultrapassar o limite maximo (50 registros) para cada vetor global.
+- Siglas de departamento sao checadas contra a lista fixa {BCC, BSI, ADS, GIT, BEC}.
+- O algoritmo de validacao de CPF verifica o formato e os digitos verificadores.
+- Cada TC checa se o autor existe, pertence ao departamento do arquivo e se o orientador informado e um professor valido.
+- Nenhum codigo (professor, aluno ou TC) pode se repetir; o mesmo vale para CPF.
+
+4. Fluxo de uso
+- Ao iniciar, o programa carrega os quatro conjuntos de dados e zera os contadores de votos.
+- MENU1 oferece as opcoes "Iniciar nova votacao" e "Continuar votacao gravada" (letras a ou b, maiusculas ou minusculas).
+  * Iniciar nova votacao reinicia os votos e abre o MENU2.
+  * Continuar votacao le o arquivo parcial.txt. Caso o arquivo nao exista ou esteja incorreto, o programa informa o problema e retorna ao MENU1.
+- MENU2 possui:
+  a) Entrar com voto: solicita CPF, valida e garante que o eleitor nao tenha votado. Em seguida, pede o codigo do TC ate que seja fornecido um valor valido.
+  b) Suspender votacao: salva o andamento atual em parcial.txt (quantidade de votos + linhas com CPF e codigo do TC) e encerra o programa.
+  c) Concluir votacao: gera resultado.txt com os TCs vencedores (um ou mais em caso de empate), dados do aluno e orientador, mais as listas de eleitores que votaram e que nao votaram. Depois encerra o programa.
+
+5. Observacoes
+- O arquivo parcial.txt e sobrescrito sempre que a votacao e suspensa.
+- Se nenhum voto for registrado, resultado.txt informa "Nenhum voto computado" e lista os eleitores por status.
+- Para compilar em um ambiente com GCC: gcc main.c -o votacao -Wall -Wextra -std=c11
+

@@ -1,0 +1,30 @@
+Laboratorio de Manipulacao de Arquivos - Explicacao
+
+1. Objetivo do trabalho
+O laboratorio exige um programa em C que leia arquivos texto, valide os dados e conduza a votacao do melhor Trabalho de Conclusao de Curso (TC). O sistema deve garantir a integridade das informacoes e apoiar a comissao julgadora da IES.
+
+2. Arquivos de entrada
+Todos os arquivos ficam em dados/ e devem conter uma quebra de linha ao final.
+- professores.txt: quantidade inicial seguida por linhas no formato "codigo depto idade nome".
+- alunos.txt: quantidade inicial seguida por "matricula ano depto idade nome" (ano sempre 3).
+- TC_<SIGLA>.txt: um arquivo por departamento (BCC, BSI, ADS, GIT, BEC) com "codigoTC matriculaAutor codigoOrientador titulo".
+- comissao.txt: quantidade inicial seguida de CPFs no formato xxx.xxx.xxx-yy.
+
+3. Estruturas obrigatorias
+O codigo usa as estruturas Pessoa, Professor, Aluno, TC e Eleitor indicadas no enunciado. Como variaveis globais ha apenas os vetores docentes[max], formandos[max], listaTCs[max] e comissao[max], alem dos contadores de quantidade.
+
+4. Fluxo do programa
+1) Inicializacao: o executavel detecta seu diretorio raiz, garante as pastas dados/ e saida/ e carrega todas as informacoes de entrada validando departamentos, CPFs, codigos e relacionamentos.
+2) MENU1: apresenta as opcoes "a) Iniciar nova votacao" e "b) Continuar votacao gravada".
+3) MENU2 (apos iniciar nova votacao ou retomar uma parcial): 
+   a) Entrar com voto: solicita CPF, valida se pertence a comissao e se ainda nao votou; em seguida pede o codigo do TC e repete em caso de erro.
+   b) Suspender votacao: gera saida/parcial.txt com os votos computados e encerra.
+   c) Concluir votacao: gera saida/resultado.txt com os TCs vencedores, dados de aluno/orientador, eleitores que votaram e que nao votaram; depois encerra.
+4) Opcao "Continuar votacao gravada": carrega saida/parcial.txt, reconstrui o estado da votacao e volta ao MENU2.
+
+5. Regras adicionais
+- Cada arquivo texto e lido apenas uma vez; inconsistencias encerram a execucao com mensagem.
+- CPF passa por validacao de formato e digitos verificadores.
+- Nao ha TCs ou pessoas duplicadas; os relacionamentos autor/orientador devem existir.
+- Os votos sao contabilizados por TC e cada eleitor e marcado com o codigo votado.
+- Nao ha necessidade de tratar acentuacao de strings na entrada.

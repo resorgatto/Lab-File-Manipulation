@@ -1,0 +1,15 @@
+TC vencedor
+Codigo: 303
+Titulo: Plataforma de Dados
+Aluno: Pedro Alves
+Depto aluno: ADS
+Orientador: Carla Mendes
+Depto orientador: ADS
+
+Eleitores que votaram
+660.487.647-07 303
+
+Eleitores que nao votaram
+593.824.219-39
+489.241.157-40
+815.659.387-12
